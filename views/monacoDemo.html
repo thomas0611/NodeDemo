@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <link data-name="vs/editor/editor.main" rel="stylesheet" href="../monaco-editor/min/vs/editor/editor.main.css">
+</head>
+
+<body>
+    <!--要绑定的对象-->
+    <div id="container" style="height:800px;"></div>
+    <script type="text/template" id="codeTpl">
+using Panto.Map.Extensions.DAL;
+using PDRZ.Integration.Entity.InternalPlatForm.Base;
+using System;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+
+namespace PDRZ.Integration.Entity.School.AssetModule
+{
+    /// <summary>
+    /// {{EntityName}} 的实体类
+    ///</summary>
+    [DataContract]
+    [Serializable]
+    [DataEntity(Alias = "@Model.ConfigInfo.ModelFolderName")]
+    public partial class {{EntityName}} : WithSchoolIDBaseEntity
+    {
+        #region 标准字段
+        {{#ColList}}
+        ///<summary>
+        ///{{Comment}}
+        ///</summary>
+        [DataMember]
+        [DataColumn(IsNullable = {{NotNUll}})]
+        [Description("{{Comment}}")]
+        public {{ProTypeName}} {{ColumnName}} { get; set; }
+        {{/ColList}}
+        #endregion
+
+        #region 扩展字段
+        {{#ExtColList}}
+        ///<summary>
+        ///{{Comment}}
+        ///</summary>
+        public {{ProTypeName}} {{ColumnName}} { get; set; }
+        {{/ExtColList}}
+        #endregion
+    }
+}
+</script>
+</body>
+<script>var require = { paths: { 'vs': '../monaco-editor/min/vs' } };</script>
+<script src="../monaco-editor/min/vs/loader.js"></script>
+<script src="../monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+<script src="../monaco-editor/min/vs/editor/editor.main.js"></script>
+<script src="../scripts/jquery-1.10.2.min.js"></script>
+<script src="../scripts/mustache.js"></script>
+<script>
+    var monacoEditor;
+    //绑定对象并赋值
+    require(['vs/editor/editor.main'], function () {
+        //container为要绑定的对象
+        monacoEditor = monaco.editor.create(document.getElementById('container'), {
+            value: "",
+            language: 'csharp',
+            wrappingColumn: 0,
+            wrappingIndent: "indent"
+        });
+        monaco.editor.setTheme("vs-dark");
+    });
+    //自适应宽度
+    window.onresize = function () {
+        if (monacoEditor) {
+            monacoEditor.layout();
+        }
+    };
+    //移除原有对象
+    //$("#container").children().remove();
+    $.ajax({
+        url: '/GetTableByName/Asset_AssetInfo',
+        dataType: 'json',
+        success: function (res) {
+            var tpl = $("#codeTpl").html();
+            var model = {
+                EntityName: res.data[0]["TableName"],
+                ColList: res.data.filter(t => t.IsDataColumn === 1),
+                ExtColList: res.data.filter(t => t.IsDataColumn === 0),
+                ProTypeName: function () {
+                    return ColTypes[this.TypeName] + (this.NotNUll ? "" : "?");
+                }
+            };
+            var h = Mustache.render(tpl, model);
+            monacoEditor.setValue(h);
+        }
+    });
+    var ColTypes = {
+        uniqueidentifier: "Guid",
+        nvarchar: "string",
+        datetime: "datetime",
+        int: "int",
+        bit: "bool",
+        timestamp: "byte[]",
+    };
+</script>
+
+</html>

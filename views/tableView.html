@@ -1,0 +1,32 @@
+<html>
+<head>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/docs.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bs-example" data-example-id="bordered-table">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ColumsID</th>
+                    <th>ColumnName</th>
+                    <th>Comment</th>
+                    <th>TypeName</th>
+                    <th>NotNUll</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#ColumnList}}
+                <tr>
+                    <th scope="row">{{ColumsID}}</th>
+                    <td><a href="javascript:;">{{ColumnName}}</a></td>
+                    <td>{{Comment}}</td>
+                    <td>{{TypeName}}</td>
+                    <td>{{NotNUll}}</td>
+                </tr>
+                {{/ColumnList}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/docs.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bs-example" data-example-id="bordered-table">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ClassNo</th>
+                    <th>ClassName</th>
+                    <th>ClassID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#ClassList}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td><a href="Class/Edit/{{ClassID}}">{{ClassNo}}</a></td>
+                    <td>{{ClassName}}</td>
+                    <td>{{ClassID}}</td>
+                </tr>
+                {{/ClassList}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

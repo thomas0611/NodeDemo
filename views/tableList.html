@@ -1,0 +1,30 @@
+<html>
+<head>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/docs.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bs-example" data-example-id="bordered-table">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>TableID</th>
+                    <th>TableName</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#TableList}}
+                <tr>
+                    <th scope="row">{{IndexStr}}</th>
+                    <td><a href="/TableView/{{TableName}}">{{TableID}}</a></td>
+                    <td>{{TableName}}</td>
+                    <td>{{Comment}}</td>
+                </tr>
+                {{/TableList}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
