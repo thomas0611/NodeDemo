@@ -74,8 +74,10 @@ router.get('/Cheerio', function (req, res) {
             list.push(
                 {
                     title: tar.text(),
+                    content:$(item).find(".post_item_summary").text().replace("\n    ",'').replace('\n    ',''),
                     url: tar.attr("href"),
-                    diggnum: $(item).find(".diggnum").text()
+                    diggnum: $(item).find(".diggnum").text(),
+                    article_view:$(item).find(".article_view").children().text()
                 });
         });
         res.end(JSON.stringify({ data: list }, null, 2));
@@ -89,6 +91,20 @@ router.get('/monaco', async function (req, res) {
 router.get('/monacocode', async function (req, res) {
     fs.readFile(rootPath + "/controller/indexController.js", 'utf8', function (err, tpl) {
         res.send(tpl);
+    });
+});
+router.get('/csharp', async function (req, res) {
+    var edge = require('edge-js');
+    var dllpath= rootPath + "/CNodeDll.dll"
+    var getPrinter = edge.func({
+        assemblyFile: dllpath,
+        typeName: 'Startup',
+        methodName: 'Invoke' });
+    var input = 5;
+    getPrinter(input, function (error, result) {
+        if (error) console.log("err:" + error);
+        console.log("res:" + result);
+        res.end(JSON.stringify({ data: result }, null, 2));
     });
 });
 module.exports = router;
