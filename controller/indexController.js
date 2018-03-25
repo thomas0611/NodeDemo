@@ -74,10 +74,10 @@ router.get('/Cheerio', function (req, res) {
             list.push(
                 {
                     title: tar.text(),
-                    content:$(item).find(".post_item_summary").text().replace("\n    ",'').replace('\n    ',''),
+                    content: $(item).find(".post_item_summary").text().replace("\n    ", '').replace('\n    ', ''),
                     url: tar.attr("href"),
                     diggnum: $(item).find(".diggnum").text(),
-                    article_view:$(item).find(".article_view").children().text()
+                    article_view: $(item).find(".article_view").children().text()
                 });
         });
         res.end(JSON.stringify({ data: list }, null, 2));
@@ -93,18 +93,19 @@ router.get('/monacocode', async function (req, res) {
         res.send(tpl);
     });
 });
-router.get('/csharp', async function (req, res) {
+router.get('/csharp/:type', async function (req, res) {
     var edge = require('edge-js');
-    var dllpath= rootPath + "/CNodeDll.dll"
-    var getPrinter = edge.func({
+    var dllpath = rootPath + "/csharpDll/CNodeDll.dll";
+    var methodName = req.params.type === "1" ? "GetLocalSites" : "GetRemoteSites";
+    var getSites = edge.func({
         assemblyFile: dllpath,
         typeName: 'Startup',
-        methodName: 'Invoke' });
+        methodName: methodName
+    });
     var input = 5;
-    getPrinter(input, function (error, result) {
+    getSites(input, function (error, result) {
         if (error) console.log("err:" + error);
-        console.log("res:" + result);
-        res.end(JSON.stringify({ data: result }, null, 2));
+        res.end(JSON.stringify(result, null, 2));
     });
 });
 module.exports = router;
