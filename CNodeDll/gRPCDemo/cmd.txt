@@ -1,0 +1,31 @@
+﻿packages\Grpc.Tools.1.0.0\tools\windows_x86\protoc.exe -IgRPCDemo --csharp_out gRPCDemo  gRPCDemo\websites.proto --grpc_out gRPCDemo --plugin=protoc-gen-grpc=packages\Grpc.Tools.1.0.0\tools\windows_x86\grpc_csharp_plugin.exe
+
+
+// 此处使用service标签定义服务
+service NewsService {
+// 此处使用rpc标签定义方法
+    rpc add (News) returns (NewsResponse) {
+    }
+    rpc save (News) returns (NewsResponse) {
+    }
+    rpc delete (News) returns (NewsResponse) {
+    }
+    rpc list (News) returns (NewsResponse) {
+    }
+}
+// 此处使用message标签定义方法的入参和出参
+message NewsResponse {
+    News news = 1 [deprecated = true];
+    repeated News newslist = 2;
+}
+message News {
+     int32 id = 1;
+     string requestTitle = 2;
+}
+
+详细说明：
+
+proto文件名必须小写开头，每个单词都要以小写字母开头，单词之间以下划线分割，例如xxx_yyy_service.proto。对应的servcie要定义为XxxYyyService，必须严格驼峰，不能连续大写；
+一个proto文件内只能定义一个service，多个 service 需要多个 proto 文件，service和message必须在同一个 proto 文件中;
+message定义的对象命名规范为首字母大写，如此定义是gPRC的规范；
+proto 文件须放置在项目中的如下目录${Project}/src/main/proto/
