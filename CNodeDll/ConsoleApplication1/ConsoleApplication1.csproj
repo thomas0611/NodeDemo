@@ -54,6 +54,10 @@
       <Project>{b0913f3c-16d4-4f52-ba16-785f54007fa5}</Project>
       <Name>CNodeDll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{91FF87FC-A1D2-42CF-B615-04139BBADCC5}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

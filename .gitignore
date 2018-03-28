@@ -16,3 +16,4 @@
 /CNodeDll/Utility/bin/*
 /CNodeDll/Utility/obj/*
 /CNodeDll/packages/*
+/CNodeDll/.vs/config

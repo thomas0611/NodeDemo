@@ -108,4 +108,14 @@ router.get('/csharp/:type', async function (req, res) {
         res.end(JSON.stringify(result, null, 2));
     });
 });
+router.get('/rpc', async function (req, res) {
+    var PROTO_PATH = rootPath + '/gRPC/websites.proto';
+    var grpc = require('grpc');
+    var hello_proto = grpc.load(PROTO_PATH).gRPCDemo;
+    var client = new hello_proto.rpcSite('localhost:9007', grpc.credentials.createInsecure());
+    client.GetSites({ name: "Thomas" }, function (err, response) {
+        if (error) console.log("err:" + error);
+        res.end(JSON.stringify(response, null, 2));
+    });
+});
 module.exports = router;
