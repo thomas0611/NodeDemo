@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using GRPCDemo;
 using Grpc.Core;
 using Utility;
+using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace gRPCServer
 {
@@ -45,18 +47,62 @@ namespace gRPCServer
             }
             return Task.FromResult(reply);
         }
+
+        public override Task<DbDetail> GetSiteDetail(SitesRequest request, ServerCallContext context)
+        {
+            try
+            {
+                string path = request.Name;
+                ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+                string filename = $@"{path}\Web.config";
+                map.ExeConfigFilename = filename;
+                Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+                var strCon = "";
+                foreach (ConnectionStringSettings item in config.ConnectionStrings.ConnectionStrings)
+                {
+                    if (item.Name != "DefaultConnection" && item.Name != "LocalSqlServer")
+                    {
+                        strCon = item.ConnectionString;
+                        break;
+                    }
+                }
+                var dbInfo = FormatCon(strCon);
+                dbInfo.Message = "success";
+                return Task.FromResult(dbInfo);
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new DbDetail() { Message = ex.Message});
+            }
+        }
+
+        /// <summary>
+        /// 格式化连接字符串
+        /// </summary>
+        /// <param name="strCon"></param>
+        /// <returns></returns>
+        private DbDetail FormatCon(string strCon)
+        {
+            if (string.IsNullOrEmpty(strCon)) { return new DbDetail(); }
+            var dbInfo = new DbDetail();
+            dbInfo.Address = Regex.Match(strCon, @"server=([^;]+)").Groups[1].Value;
+            dbInfo.Name = Regex.Match(strCon, @"base=([^;]+)").Groups[1].Value;
+            dbInfo.User = Regex.Match(strCon, @"(id|user)=([^;]+)").Groups[2].Value;
+            dbInfo.Pwd = Regex.Match(strCon, @"(pwd|password)=([^;]+)").Groups[2].Value;
+            return dbInfo;
+        }
     }
 
     class Program
     {
-        const int Port = 9007;
+        const int Port = 50051;
 
         public static void Main(string[] args)
         {
             Server server = new Server
             {
                 Services = { rpcSite.BindService(new RpcSiteImpl()) },
-                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("127.0.0.1", Port, ServerCredentials.Insecure) }
             };
             server.Start();
 

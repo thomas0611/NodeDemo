@@ -30,9 +30,25 @@ public class Startup
     {
         try
         {
-            Channel channel = new Channel("127.0.0.1:9007", ChannelCredentials.Insecure);
+            Channel channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
             var client = new rpcSite.rpcSiteClient(channel);
             var reply = client.GetSites(new SitesRequest { Name = "Thomas" });
+            return reply;
+        }
+        catch (Exception ex)
+        {
+            return new { Message = ex.Message };
+        }
+    }
+
+    public async Task<object> GetSiteDetail(dynamic input)
+    {
+        try
+        {
+            string path = (string)input;
+            Channel channel = new Channel("127.0.0.1:50051", ChannelCredentials.Insecure);
+            var client = new rpcSite.rpcSiteClient(channel);
+            var reply = client.GetSiteDetail(new SitesRequest { Name = path });
             return reply;
         }
         catch (Exception ex)

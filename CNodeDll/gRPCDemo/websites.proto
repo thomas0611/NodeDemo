@@ -2,6 +2,7 @@
 package gRPCDemo;
 service rpcSite {
   rpc GetSites (SitesRequest) returns (SitesReply) {}
+  rpc GetSiteDetail (SitesRequest) returns (DbDetail) {}
 }
 
 message SitesRequest {
@@ -11,6 +12,14 @@ message SitesRequest {
 message SitesReply {
   string message = 1;
   repeated WebSite ListWebSite = 2;
+}
+
+message DbDetail {
+  string message = 1;
+  string Address = 2;
+  string Name = 3;
+  string User = 4;
+  string Pwd = 5;
 }
 
 message WebSite {

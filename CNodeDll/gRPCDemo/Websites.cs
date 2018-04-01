@@ -24,17 +24,21 @@ namespace GRPCDemo {
           string.Concat(
             "Cg53ZWJzaXRlcy5wcm90bxIIZ1JQQ0RlbW8iHAoMU2l0ZXNSZXF1ZXN0EgwK",
             "BG5hbWUYASABKAkiRQoKU2l0ZXNSZXBseRIPCgdtZXNzYWdlGAEgASgJEiYK",
-            "C0xpc3RXZWJTaXRlGAIgAygLMhEuZ1JQQ0RlbW8uV2ViU2l0ZSJ0CgdXZWJT",
-            "aXRlEgoKAklEGAEgASgFEgwKBE5hbWUYAiABKAkSFAoMUGh5c2ljYWxQYXRo",
-            "GAMgASgJEg8KB0FkZHJlc3MYBCABKAkSGgoSQmluZGluZ0luZm9ybWF0aW9u",
-            "GAUgASgJEgwKBFBvcnQYBiABKAUyRQoHcnBjU2l0ZRI6CghHZXRTaXRlcxIW",
-            "LmdSUENEZW1vLlNpdGVzUmVxdWVzdBoULmdSUENEZW1vLlNpdGVzUmVwbHki",
-            "AGIGcHJvdG8z"));
+            "C0xpc3RXZWJTaXRlGAIgAygLMhEuZ1JQQ0RlbW8uV2ViU2l0ZSJVCghEYkRl",
+            "dGFpbBIPCgdtZXNzYWdlGAEgASgJEg8KB0FkZHJlc3MYAiABKAkSDAoETmFt",
+            "ZRgDIAEoCRIMCgRVc2VyGAQgASgJEgsKA1B3ZBgFIAEoCSJ0CgdXZWJTaXRl",
+            "EgoKAklEGAEgASgFEgwKBE5hbWUYAiABKAkSFAoMUGh5c2ljYWxQYXRoGAMg",
+            "ASgJEg8KB0FkZHJlc3MYBCABKAkSGgoSQmluZGluZ0luZm9ybWF0aW9uGAUg",
+            "ASgJEgwKBFBvcnQYBiABKAUyhAEKB3JwY1NpdGUSOgoIR2V0U2l0ZXMSFi5n",
+            "UlBDRGVtby5TaXRlc1JlcXVlc3QaFC5nUlBDRGVtby5TaXRlc1JlcGx5IgAS",
+            "PQoNR2V0U2l0ZURldGFpbBIWLmdSUENEZW1vLlNpdGVzUmVxdWVzdBoSLmdS",
+            "UENEZW1vLkRiRGV0YWlsIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GRPCDemo.SitesRequest), global::GRPCDemo.SitesRequest.Parser, new[]{ "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GRPCDemo.SitesReply), global::GRPCDemo.SitesReply.Parser, new[]{ "Message", "ListWebSite" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GRPCDemo.DbDetail), global::GRPCDemo.DbDetail.Parser, new[]{ "Message", "Address", "Name", "User", "Pwd" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GRPCDemo.WebSite), global::GRPCDemo.WebSite.Parser, new[]{ "ID", "Name", "PhysicalPath", "Address", "BindingInformation", "Port" }, null, null, null)
           }));
     }
@@ -296,6 +300,235 @@ namespace GRPCDemo {
 
   }
 
+  public sealed partial class DbDetail : pb::IMessage<DbDetail> {
+    private static readonly pb::MessageParser<DbDetail> _parser = new pb::MessageParser<DbDetail>(() => new DbDetail());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DbDetail> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::GRPCDemo.WebsitesReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DbDetail() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DbDetail(DbDetail other) : this() {
+      message_ = other.message_;
+      address_ = other.address_;
+      name_ = other.name_;
+      user_ = other.user_;
+      pwd_ = other.pwd_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DbDetail Clone() {
+      return new DbDetail(this);
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 1;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Address" field.</summary>
+    public const int AddressFieldNumber = 2;
+    private string address_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Address {
+      get { return address_; }
+      set {
+        address_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Name" field.</summary>
+    public const int NameFieldNumber = 3;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "User" field.</summary>
+    public const int UserFieldNumber = 4;
+    private string user_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string User {
+      get { return user_; }
+      set {
+        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Pwd" field.</summary>
+    public const int PwdFieldNumber = 5;
+    private string pwd_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Pwd {
+      get { return pwd_; }
+      set {
+        pwd_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DbDetail);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DbDetail other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Message != other.Message) return false;
+      if (Address != other.Address) return false;
+      if (Name != other.Name) return false;
+      if (User != other.User) return false;
+      if (Pwd != other.Pwd) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (Address.Length != 0) hash ^= Address.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (User.Length != 0) hash ^= User.GetHashCode();
+      if (Pwd.Length != 0) hash ^= Pwd.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Message.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Message);
+      }
+      if (Address.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Address);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (User.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(User);
+      }
+      if (Pwd.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Pwd);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (Address.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Address);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (User.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      }
+      if (Pwd.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pwd);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DbDetail other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      if (other.Address.Length != 0) {
+        Address = other.Address;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.User.Length != 0) {
+        User = other.User;
+      }
+      if (other.Pwd.Length != 0) {
+        Pwd = other.Pwd;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Message = input.ReadString();
+            break;
+          }
+          case 18: {
+            Address = input.ReadString();
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 34: {
+            User = input.ReadString();
+            break;
+          }
+          case 42: {
+            Pwd = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class WebSite : pb::IMessage<WebSite> {
     private static readonly pb::MessageParser<WebSite> _parser = new pb::MessageParser<WebSite>(() => new WebSite());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -303,7 +536,7 @@ namespace GRPCDemo {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::GRPCDemo.WebsitesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::GRPCDemo.WebsitesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
